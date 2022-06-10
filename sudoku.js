@@ -1,11 +1,5 @@
-// Takes a board as a string in the format
-// you see in the puzzle file. Returns
-// something representing a board after
-// your solver has tried to solve it.
-// How you represent your board is up to you!
-function solve(boardString) {
-  console.log('first changes');
-}
+const fs = require('fs');
+
 
 // Returns a boolean indicating whether
 // or not the provided board is solved.
@@ -51,6 +45,8 @@ function isSolved(number, coordinate ,board) {
  return finalCeck
 }
 
+
+
 // let checkBox = function check3(c, r) {
 //   let box = [
 //     [[0,0], [0, 1], [0, 2], [1,0], [1, 1], [1, 2], [2,0], [2, 1], [2, 2]],
@@ -91,12 +87,58 @@ function isSolved(number, coordinate ,board) {
 // for output to the screen.
 // The input board will be in whatever
 // form `solve` returns.
-function prettyBoard(board) {
-  
 
+
+const findPlace = (board) => {
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      if (board[r][c] == '-') {
+        return [r, c]
+      }
+    }
+  }
+  return null
 }
 
+function prettyBoard(solve(sudokuString)) { 
+  const position = findPlace(board)
+    if (position == null) {
+      return true;
+    }
+    for (let i = 1; i <= 9; i++) {
+      const number  = i
+      const isValid = isSolved(number, coordinate, board);
+      if (isValid) {
+        const [x,y] = coordinate
+        board[x][y] = number
+
+        if (prettyBoard()) {
+          return true
+        }
+
+        board[x][y] = '.';
+
+      }
+    }
+
+    return false
+  }
+  function start (board){
+    if(prettyBoard()){
+      return board
+    }
+  }
+console.log(start(board))
+
 // Exports all the functions to use them in another file.
+=======
+const sudokuString = fs.readFileSync('./sudoku-puzzles.txt', 'utf-8');
+
+function solve(sudokuString) {
+  return sudokuString.slice(0, 82).match(/.{1,9}/gm).map((el) => el.split(''));
+}
+
+
 module.exports = {
   solve,
   isSolved,
