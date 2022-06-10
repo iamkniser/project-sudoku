@@ -20,9 +20,47 @@ function isSolved(board) {
 // for output to the screen.
 // The input board will be in whatever
 // form `solve` returns.
-function prettyBoard(board) {
 
+const findPlace = (board) => {
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      if (board[r][c] == '-') {
+        return [r, c]
+      }
+    }
+  }
+  return null
 }
+
+function prettyBoard(solve(sudokuString)) { 
+  const position = findPlace(board)
+    if (position == null) {
+      return true;
+    }
+    for (let i = 1; i <= 9; i++) {
+      const number  = i
+      const isValid = isSolved(number, coordinate, board);
+      if (isValid) {
+        const [x,y] = coordinate
+        board[x][y] = number
+
+        if (prettyBoard()) {
+          return true
+        }
+
+        board[x][y] = '.';
+
+      }
+    }
+
+    return false
+  }
+  function start (board){
+    if(prettyBoard()){
+      return board
+    }
+  }
+console.log(start(board))
 
 // Exports all the functions to use them in another file.
 module.exports = {
